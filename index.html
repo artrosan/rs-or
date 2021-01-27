@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script src="js/jquery.min.js"></script>
+
+    <script>
+    function set_validator_errors(){
+        orderValidator.errorTitle = 'Исправите следеће грешке'; 
+
+        orderValidator.errorNameField = 'Ime'; 
+        orderValidator.errorNameMess = 'Унесите своје име'; 
+        
+        orderValidator.errorPhoneField = 'Telefon za kontakt'; 
+        orderValidator.errorPhoneMess = 'Унесите тачан број телефона'; 
+        
+        orderValidator.errorAddress = 'Унесите тачну адресу'; 
+        orderValidator.errorRequired = 'Обавезно поље'; 
+        orderValidator.errorMaxLength = 'валидан максимум {1} знак'; 
+        orderValidator.errorMinLength = 'валидан минимум {1} знак'; 
+        orderValidator.errorEmailField = 'Adresa e-pošte';
+        orderValidator.errorEmail = 'Наведена је неважећа адреса е-поште';
+        }
+    </script>
+    
+<script>
+
+
+
+    
+    setOffer: function (offerId) {
+        if (offerId == this._setOfferId) {
+            return ;
+        }
+        this._setOfferId = offerId;
+        if (offerId) {
+            var offer = app.offers[offerId];
+            var previousOffer = app.currentOffer;
+            app.currentOffer = offer;
+            var event = this.jq.Event("offerchange");
+            event.previousOffer = previousOffer;
+            event.currentOffer = app.currentOffer;
+            this.jq(document).trigger(event);
+            this.updatePage(offer);
+        } else {
+            $('input[name=country]').val('');
+        }
+    },
+    
+    updatePage: function(offer) {
+        $('x-newprice').html(offer.price);
+        $('x-oldprice').html(offer.price2);
+        $('x-currency').html(offer.currency.name);
+        $('input[name=offer], select[name=offer]').val(offer.id);
+        $('input[name=country]').val(offer.country.code);
+    },
+
+    blockForm: function() {
+        // Блокируем кнопки при отправке формы
+        $('input[type=submit]', $(this)).prop( 'disabled', true ).attr( 'disabled', true );
+        $('button', $(this)).prop( 'disabled', true ).attr( 'disabled', true );
+        app.incompleteOrder.lock = true;
+        clearTimeout(app.incompleteOrder.timer);
+    },
+
+    unblockForm: function() {
+        $('input[type=submit]', $(this)).prop( 'disabled', false ).attr( 'disabled', false );
+        $('button[type=submit]', $(this)).prop( 'disabled', false ).attr( 'disabled', false );
+        app.incompleteOrder.lock = false;
+        clearTimeout(app.incompleteOrder.timer);
+    }
+
+};
+
+
+</script><script src="js/form.validate.js"></script>
+<script src="js/form.incomplete.js"></script>
+<script src="js/main2.js"></script>
+
+
+
+<script src="js/jquery.min_1.js"></script>	<meta charset="UTF-8">
+	<meta content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1" name="viewport">
+	<title>Artrosan</title>
+	<link rel="shortcut icon" href="images/prod.png" type="image/x-icon">
+	<link rel="stylesheet" href="css/slick.css">
+	<link rel="stylesheet" href="css/slick-theme.css">
+	<link rel="stylesheet" href="css/style2.css">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Artrosan - средство от болей в суставах">
+<meta property="og:description" content="Artrosan - средство для восстановления суставов.  Быстро снимает болевой синдром, устраняет воспаление и способствует регенерации хрящевой ткани. 100% натуральный состав.">
+<meta property="og:url" content="">
+</head>
+<body>
+	<header>
+		<div class="limit">
+			<div class="flex">
+				<h1>Artrosan</h1>
+				<div class="top_rr">
+					<p>
+						100% efikasna<br> formula
+					</p>
+					<p>
+						Kurirska dostava<br> širom Srbije
+					</p>
+				</div>
+			</div>
+		</div>
+	</header>
+	<section class="sec1">
+		<div class="limit">
+			<div class="circ1"></div>
+			<div class="z_h">
+				<h1>
+					<b>Artrosan<sup>&reg;</sup> –</b> ZDRAVA SNAGA 4 PRIRODNA KOMPONENTA Brzo ublazavanje bolova u zglobovima
+				</h1>
+				<p>
+					Naucna formula -seruma irvasa,timjana,kestena,mumio ce vam vratiti zdravlje u ledjima<br>i zglobovima za svega 4 nedelje
+				</p>
+				<ul>
+					<li>
+						<b>Serum Irvasa</b> smanjuje upalu i ublažava bol
+					</li>
+					<li>
+						<b>ulje timjana</b> obnavlja cirkulaciju krvi u zglobu
+					</li>
+					<li>
+						<b>ulje kestena</b> podstiče sintezu kolagena i rast ćelija hrskavice
+					</li>
+					<li>
+						<b>mumio inhibira</b> proces starenja zgloba
+					</li>
+				</ul>
+				<img src="images/base_prod.png" class="prod" alt="">
+				<div class="form_block">
+					<p class="red">
+						Promocija važi samo<br>na teritoriji Srbije
+					</p>
+					<div class="flex">
+						<div class="price_l">
+							<p>Redovna cena</p>
+							<div class="prc old"><text class="price_land_s4"> <x-oldprice>4600</x-oldprice> </text>
+								<text class="price_land_curr"> <x-currency>RSD</x-currency> </text></div>
+							</div>
+							<div class="price_r">
+								<p>Cena sa popustom</p>
+								<div class="prc new"><text class="price_land_s1"> <x-newprice>2300</x-newprice> </text>
+									<text class="price_land_curr"> <x-currency>RSD</x-currency> </text><sup>*</sup></div>
+								</div>
+							</div>
+							<form class="main-order-form" action="https://healthbestblog.space/cpatl/api.php" method="post">
+
+    <select name="offer" class="form-control country_chang" style="display: none;">
+        <option data-country-code="RS" selected="selected" value="21450">
+            Сербия        </option>
+    </select>
+
+    								<p class="label">Ukucajte vase IME</p>
+								<input type="text" name="name" placeholder="JELENA" required>
+								<p class="label">Ukucajte vas BR Telefona</p>
+								<input type="tel" name="phone" placeholder="Telefona" required>
+								<p class="upper">
+									jos krema po promotivnoj ceni 15 <br> u magacinu,NE PROPUSTIE SVOJU SANSU
+								</p>
+								<button class="btn">
+									Porucite Artrosan
+								</button>
+								<div class="saffity">
+									<img src="images/security-on.png" alt="">
+									<p class="litt">
+										Ne otkrivamo vaše lične podatke i ne prenosimo podatke koje ste ostavili trećim licima. * Prilikom naručivanja tretmana
+									</p>
+								</div>
+								   <input type="hidden" name="stream_hid" value="jKOUmDqM">
+      <input type="hidden" name="offer_id" value="5400">
+
+      
+      <input type="hidden" name="country" value="RS"> 
+
+      <input type="hidden" name="sid1" value="alex">
+      <input type="hidden" name="sid2" value="alex2">
+      <input type="hidden" name="sid3" value="alex3">
+      <input type="hidden" name="redirect_url" value="https://amazinghealth.github.io/germitox-ita/success/index.html">
+</form>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section class="sec2">
+					<div class="limit">
+						<h2>Zašto je Artrosan efikasan protiv bola<br>u zglobovima?</h2>
+						<p class="ctr">
+							Serum rogova irvasa 'kao lek protiv bolova u leđima i zglobovima počeo se koristiti u davnim vremenima. Danas se lekovi na bazi prirodnih seruma smatraju najefikasnijim za zglobove.
+						</p>
+						<p class="ctr">
+							U ARTROSAN -u 4 najlepša prirodna seruma prvi put su kombinovani u jedinstvenu formulu koja daje sveobuhvatan rezultat: ublažava bol, povećava cirkulaciju krvi, obnavlja hrskavicu i štiti od habanja.
+						</p>
+						<div class="block_sec2">
+							<img src="images/prod_snake.png" class="prods" alt="">
+							<img src="images/rog.png" class="snake" alt="">
+							<div class="text_bl padd1">
+								<h3>Serum roga irvasa</h3>
+								<p><b>Smanjuje bol i upalu</b></p>
+								<p class="normal">
+									Suzbija upalne reakcije u zglobovima i susednim mišićima, efikasno ublažava bol.
+								</p>
+							</div>
+						</div>
+						<div class="block_sec2">
+							<img src="images/vet.png" class="scorp" alt="">
+							<div class="circ_color"></div>
+							<div class="text_bl padd2">
+								<h3>Ulje timjana</h3>
+								<p><b>normalizuje cirkulaciju</b></p>
+								<p class="normal">
+									Stimuliše protok krvi u zglobovima, razrjeđuje krv, povećava nivo hemoglobina i leukocita, poboljšava propusnost krvnih sudova i kapilara.
+								</p>
+							</div>
+						</div>
+						<div class="block_sec2">
+							<img src="images/z1.png" class="z1" alt="">
+							<img src="images/z2.png" class="z2" alt="">
+							<img src="images/z3.png" class="z3" alt="">
+							<div class="circ_color cr2"></div>
+							<div class="text_bl padd3">
+								<h3>Ulje kestena</h3>
+								<p><b>Obnavlja hrskavično tkivo</b></p>
+								<p class="normal">
+									Usporava proces starenja i uništavanje zglobova normalizacijom nivoa hormona nadbubrežne žlezde i štitne žlezde.
+								</p>
+							</div>
+						</div>
+						<div class="block_sec2">
+							<img src="images/mur.png" class="mur" alt="">
+							<div class="circ_color"></div>
+							<div class="text_bl padd2">
+								<h3>MUMIO</h3>
+								<p><b>Stiti zglob od habanaj</b></p>
+								<p class="normal">
+									Usporava proces starenja<br> i uništavanje zglobova normalizacijom nivoa hormona nadbubrežne žlezde i štitne žlezde.
+								</p>
+							</div>
+						</div>
+					</div>
+				</section>
+		
+				
+						<section class="sec3 ch_color">
+							<div class="limit">
+								<img src="images/z3.png" class="z3" alt="">
+								<div class="flex">
+									<div class="item">Popust <text class="price_land_s1"> 2300 </text>
+										<text class="price_land_curr"> RSD </text>!</div>
+										<div class="item"><div class="btns">Poruci Artrosan</div></div>
+									</div>
+								</div>
+							</section>
+							<section class="sec8">
+								<div class="limit">
+									<h2>Kako bzo ARTROSAN <br>vraca zdravlje zglobovima?</h2>
+									<div class="flex">
+										<div class="item">
+											<div class="layer_up">1-2 nedelja</div>
+											<img src="images/trig1.png" class="trig_h" alt="">
+											<img src="images/trig1-m.png" class="trig_3" alt="">
+										</div>
+										<div class="item">
+											<p>
+												upale potpuno nestaju - crvenilo nestaje <br>i otekline. Normalna je hormonska pozadina, degenerativni procesi u hrskavičnom i zglobnom tkivu prestaju. Regeneracija započinje na ćelijskom nivou.
+											</p>
+										</div>
+										<div class="item">
+											<div class="layer_up">5-6 nedelja</div>
+											<img src="images/trig2.png" class="trig_h" alt="">
+											<img src="images/trig2-m.png" class="trig_3" alt="">
+										</div>
+										<div class="item">
+											<p>
+												Bol nestaje i upala se primjetno smanjuje. Pokretljivost u zglobovima se vraća zbog normalizacije krvotoka.
+											</p>
+										</div>
+										<div class="item">
+											<div class="layer_up" style="color: #fff;top: 45px;">3-4 nedelja </div>
+											<img src="images/trig3.png" class="trig_h" alt="">
+											<img src="images/trig3-m.png" class="trig_3" alt="">
+										</div>
+										<div class="item">
+											<p>
+												Konsolidacija postignutih rezultata: potpuna obnova pogođene hrskavice i zglobova, povratak pokretljivosti.
+											</p>
+										</div>
+									</div>
+								</div>
+							</section>
+							<section class="sec9">
+								<div class="limit">
+									<h2>kako koristiti ARTROSAN za <br>dobijanje najboljeg rezultata?</h2>
+									<div class="flex">
+										<div class="item">
+											<div class="item_top">
+												<img src="images/se1.png" alt="">
+												<img src="images/prod.png" class="item_ii1" alt="">
+											</div>
+											<p>
+												Nanesite u tankom sloju i rasporedite masažne pokrete unutar problematičnog područja
+											</p>
+										</div>
+										<div class="item">
+											<div class="item_top">
+												<img src="images/se2.png" alt="">
+												<img src="images/clock.png" class="item_ii2" alt="">
+											</div>
+											<p>
+												Nanesite 2-3 puta dnevno u zavisnosti od trenutnog stanja zgloba
+											</p>
+										</div>
+										<div class="item">
+											<div class="item_top">
+												<img src="images/se3.png" alt="">
+											</div>
+											<p>
+												Da bi se dobio stabilan pozitivan rezultat, potrebno je primeniti tetman 4-6 nedelja.
+											</p>
+										</div>
+									</div>
+								</div>
+							</section>
+							<section class="sec1 sec_last">
+								<div class="limit">
+									<div class="circ1"></div>
+									<div class="z_h">
+										<h1>
+											<b>ARTROSAN<sup>&reg;</sup> –</b> ZDRAVA SNAGA 4 PRIRODNA SERUMA Brzo eliminise bolove u zglobovima
+										</h1>
+										<p>
+											Naucna formula -seruma irvasa,timjana,kestena,mumio ce vam vratiti zdravlje u ledjima<br>i zglobovima za 4 nedelje
+										</p>
+										<ul>
+											<li>
+												<b>Serum Irvasa</b> smanjuje upalu i ublažava bol
+											</li>
+											<li>
+												<b>ulje timjana</b> obnavlja cirkulaciju krvi u zglobu
+											</li>
+											<li>
+												<b>ulje kestena</b> podstiče sintezu kolagena i rast ćelija hrskavice
+											</li>
+											<li>
+												<b>mumio inhibira</b> proces starenja zgloba
+											</li>
+										</ul>
+										<img src="images/base_prod.png" class="prod" alt="">
+										<div class="form_block">
+											<p class="red">
+												Promocija važi samo<br>na teritoriji Srbije
+											</p>
+											<div class="flex">
+												<div class="price_l">
+													<p>Redovna cena</p>
+													<div class="prc old"><text class="price_land_s4"> <x-oldprice>4600</x-oldprice> </text>
+														<text class="price_land_curr"> <x-currency>RSD</x-currency> </text></div>
+													</div>
+													<div class="price_r">
+														<p>Cena sa popustom</p>
+														<div class="prc new"><text class="price_land_s1"> <x-newprice>2300</x-newprice> </text>
+															<text class="price_land_curr"> <x-currency>RSD</x-currency> </text><sup>*</sup></div>
+														</div>
+													</div>
+													<form class="main-order-form" action="https://healthbestblog.space/cpatl/api.php" method="post">   
+
+    <select name="offer" class="form-control country_chang" style="display: none;">
+        <option data-country-code="RS" selected="selected" value="21450">
+            Сербия        </option>
+    </select>
+
+    														<p class="label">Ukucajte vase IME</p>
+														<input type="text" name="name" placeholder="IME" required>
+														<p class="label">Ukucajte vas BR Telefona</p>
+														<input type="tel" name="phone" placeholder="Telefona" required>
+														<p class="upper">
+															jos krema po promotivnoj ceni 15 <br> u magacinu,NE PROPUSTIE SVOJU SANSU
+														</p>
+														<button class="btn">
+															Porucite Artrosan
+														</button>
+														<div class="saffity">
+															<img src="images/security-on.png" alt="">
+															<p class="litt">
+																Ne otkrivamo vaše lične podatke i ne prenosimo podatke koje ste ostavili trećim licima. * Prilikom naručivanja tretmana
+															</p>
+														</div>
+															   <input type="hidden" name="stream_hid" value="jKOUmDqM">
+      <input type="hidden" name="offer_id" value="5400">
+
+      
+      <input type="hidden" name="country" value="RS"> 
+
+      <input type="hidden" name="sid1" value="alex">
+      <input type="hidden" name="sid2" value="alex2">
+      <input type="hidden" name="sid3" value="alex3">
+      <input type="hidden" name="redirect_url" value="https://amazinghealth.github.io/germitox-ita/success/index.html">
+</form>
+												</div>
+											</div>
+										</div>
+										</section>
+										<footer class="cpu">
+											<div style="text-align: center; padding: 20px; font-size: 18px;">
+												<p>OOO "OSTROV PRODAZH" OGRN: 1197746695530 VAT: 7708365555</p>
+<p>129090, Moscow, pereulok Zhivarev, house 8, stroenie 3, flat 16 email: ostrov.prodazh@mail.com Skype: ostrov.prodazh@mail.com</p> 
+
+
+    
+            <p class="conf-link doclinks">
+        <a class="nav-link" href="" onclick="window.open('/policy_en.php'); return false;">Privacy Policy</a>
+          |
+        <a class="nav-link" href="" onclick="window.open('/terms_en.php'); return false;">Terms & Conditions</a>
+      </p>
+      
+    
+											</div>
+										</footer>
+
+
+
+
+										<script src="js/main.js"></script>
+									</body>
+									</html>

@@ -1,0 +1,1 @@
+$(document).ready(function(){$(".btns").click(function(e){e.preventDefault();$("html, body").animate({scrollTop:$(".sec_last form").offset().top-150+"px"});return false;});});
